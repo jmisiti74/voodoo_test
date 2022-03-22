@@ -60,6 +60,18 @@ describe('POST /api/games', () => {
 /**
  * Testing get all games endpoint
  */
+describe.only('POST /api/games/populate', () => {
+    it('respond with 200 status code', async () => {
+        const { status } = await request(app)
+            .post('/api/games/populate')
+            .send({})
+        assert.strictEqual(status, 200);
+    });
+});
+
+/**
+ * Testing get all games endpoint
+ */
 describe('GET /api/games', () => {
     it('respond with json containing a list that includes the game we just created', async () => {
         const { body, status } = await request(app)
