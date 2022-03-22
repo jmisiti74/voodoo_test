@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
 const db = require('./models');
 
 const app = express();
@@ -25,6 +26,20 @@ app.post('/api/games', async (req, res) => {
     return res.send(game)
   } catch (err) {
     console.error('***There was an error creating a game', err);
+    return res.status(400).send(err);
+  }
+})
+
+app.post('/api/games/search', async (req, res) => {
+  const { name, platform } = req.body;
+  try {
+    const games = await db.Game.findAll({ where: {
+      name: { [Sequelize.Op.like]: `%${name}%` },
+      platform: platform || { [Sequelize.Op.ne]: platform },
+    }})
+    return res.send(games)
+  } catch (err) {
+    console.error('***There was an error looking for this game', err);
     return res.status(400).send(err);
   }
 })

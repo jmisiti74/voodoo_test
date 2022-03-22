@@ -31,6 +31,32 @@ describe('POST /api/games', () => {
     });
 });
 
+
+/**
+ * Testing search a game
+ */
+ describe('POST /api/games/search', () => {
+    let data = {
+        name: 'est A',
+        platform: 'ios',
+    }
+    it('respond with json containing one games', async () => {
+        const { body, status } = await request(app)
+            .post('/api/games/search')
+            .set('Accept', 'application/json')
+            .send(data)
+        assert.strictEqual(status, 200);
+        assert.strictEqual(body.length, 1);
+        assert.strictEqual(body[0].publisherId, '1234567890');
+        assert.strictEqual(body[0].name, 'Test App');
+        assert.strictEqual(body[0].platform, 'ios');
+        assert.strictEqual(body[0].storeId, '1234');
+        assert.strictEqual(body[0].bundleId, 'test.bundle.id');
+        assert.strictEqual(body[0].appVersion, '1.0.0');
+        assert.strictEqual(body[0].isPublished, true);
+    });
+});
+
 /**
  * Testing get all games endpoint
  */
@@ -106,4 +132,3 @@ describe('GET /api/games', () => {
         assert.strictEqual(body.length, 0);
     });
 });
-
