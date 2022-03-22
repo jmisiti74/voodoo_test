@@ -60,7 +60,7 @@ describe('POST /api/games', () => {
 /**
  * Testing get all games endpoint
  */
-describe.only('POST /api/games/populate', () => {
+describe('POST /api/games/populate', () => {
     it('respond with 200 status code', async () => {
         const { status } = await request(app)
             .post('/api/games/populate')
