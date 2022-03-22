@@ -62,14 +62,30 @@ Many other applications at Voodoo will use consume this API.
 #### Question 1:
 We are planning to put this project in production. According to you, what are the missing pieces to make this project production ready? 
 Please elaborate an action plan.
+#### Answer 1:
+I'm gonna do like if the two features (A and B) are done properly.
+
+- It may require some security to lock parts of the API (Delete, Put and Post)
+- It may also require a way to auto update s3 files
+- We also need to update the current s3 data grab way as it was a public way and may need private keys to work properly and in a secure way
+- We may need a better way to handle Logs
+
+We should set NODE_ENV to production (Remove stack traces and less verbose logs)
+We then create an EC2 instance and configue the Security Group
+We will then have an IP adress to access our services and may need a domain name
 
 #### Question 2:
 Let's pretend our data team is now delivering new files every day into the S3 bucket, and our service needs to ingest those files
 every day through the populate API. Could you describe a suitable solution to automate this? Feel free to propose architectural changes.
 
+#### Answer 2:
+We could use the versionning in s3 buckets and then be able to retrieve the same document every day at a fixed date using a chron or something like that.
+We could also use Amazon s3 lifecycle to remove older version (Like after 1 weed or a month)
+
 #### Question 3:
 Both the current database schema and the files dropped in the S3 bucket are not optimal.
 Can you find ways to improve them?
 
-
-
+#### Answer 3:
+We could change the model in our schema to look more like s3 data and avoid reformating keys
+We also could change S3 models to have only needed informations and maybe be formated in a different way (One array of object and maybe one file for both IOS and Android games) to avoid performance issues when importing them
