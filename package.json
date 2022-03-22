@@ -1,0 +1,35 @@
+{
+  "name": "game-viewer-tool",
+  "version": "1.0.0",
+  "description": "Game Viewer Tool",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "eslint": "./node_modules/.bin/eslint .",
+    "test": "NODE_ENV=test node_modules/.bin/sequelize db:migrate; NODE_ENV=test ./node_modules/.bin/mocha --exit 'test/*.js'; rm ./database_test.sqlite3"
+  },
+  "author": "Voodoo G&A",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "sequelize": "^6.17.0",
+    "sequelize-cli": "^5.5.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "expect": "^24.8.0",
+    "husky": "^1.3.1",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.5",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.18.10",
+    "sinon": "^7.3.2",
+    "supertest": "^4.0.2"
+  }
+}
